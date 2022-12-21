@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="widdth=device-width,initial-scale=1.0">
+    <title>Document</title>
+<!---->
+<script src="js/echarts.min.js"></script>
+<script src="js/vintage.js"></script>
+<script src="js/123.js"></script>
+</head>
+
+  <body>
+  <div id="main" style="width: 1800px;height: 500px;position:absolute;left:50px;top:150px"></div>
+  <script type="text/javascript">
+     // 基于准备好的dom，初始化echarts实例
+     var myChart = echarts.init(document.getElementById('main'),'dark');
+//指定图标的配置项和数据
+     var myChart4 =echars.init(document.getElementById('main4'));
+$.get('static/json/map/甘肃藏族自治州。json',function(geoJson){
+  echarts.registerMap('甘肃藏族自治州地图',geoJson)
+  var option4={
+    title:{
+      text:'甘肃藏族自治州地图',
+      left:'center',
+      top:30
+    },
+    series:
+    {
+      type:'map',
+      map:'甘肃藏族自治州地图'
+    }
+  };
+  myChart4.setOption(option4);
+})
+// 指定图表的配置项和数据
+var option = {
+  title: {  
+    text: '各省主要一级博物馆数量'
+  },
+  tooltip: {},
+    grid:{
+    top:100,
+    left:60,
+    right:150,
+  },
+  toolbox:{
+    show:true,
+    feature:{
+      dataView:{show:true,readOnly:false},
+magicType:{show:true,type:['line','bar']},
+restore:{show:true},
+saveAsImage:{show:true},
+dataZoom:{}
+
+    },
+    orient:'vertical',
+    itemSize:30,
+    iconStyle:{
+      color:'brown',
+      borderColor:'grayb'
+    },
+    emphasis:
+    {
+      iconStyle:{
+        textPosition:'right',
+        textFill:'gray',
+        textBackgroundColor:'pink',
+        textPadding:4
+      }
+    },
+top:'center',
+right:80,
+    
+  },
+  legend: {
+    data: ['数量']
+  },
+  xAxis: {
+    data: ['北京', '江苏', '浙江', '山东','西藏', '河南', '广东','上海','天津','河北','山西','内蒙古','辽宁','吉林','黑龙江','安徽','福建','江西','湖北','湖南','广西','海南','重庆','四川','贵州','云南','陕西','甘肃','青海','宁夏','新疆']
+  },
+  yAxis: {},
+  series: [
+    {
+      name: '一级博物馆数量',
+      type: 'bar',
+      data: [18, 13, 13, 18, 1,9, 10,8,4,3,6,3,6,3,6,6,5,11,9,6,3,2,5,12,4,2,9,4,2,2,2],
+      label:{
+        show:true
+      },
+      markLine:{
+        data:[{
+          type:'average'
+        }]
+      },
+      markPoint:{
+        data:[{
+          type:'max'
+        }]
+      },
+      markPoint:{
+        data:[{
+          type:'min'
+        }]
+      },
+      emphasis:{
+        itemStyle:{
+          color:'yellow'
+      },
+
+      }
+    }
+  ]
+};
+
+// 使用刚指定的配置项和数据显示图表。
+myChart.setOption(option);
+window.onresize=function(){
+  myChart.resize();
+}
+
+ </script>
+  </body>
+</html>
